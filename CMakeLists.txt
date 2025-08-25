@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find Qt6 components - Changed from Quick to Widgets!
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 # Qt standard project setup
 qt_standard_project_setup(REQUIRES 6.5)
@@ -18,6 +20,9 @@ qt_add_executable(appQtExplorer
     main.cpp
     MainWindow.cpp
     MainWindow.h
+    filesystemmodel.h filesystemmodel.cpp
+    directorytreeview.h directorytreeview.cpp
+    filelistview.h filelistview.cpp
 )
 
 # Optional: Add resources (icons, images, etc.) - uncomment when needed
@@ -52,6 +57,8 @@ target_link_libraries(appQtExplorer
         Qt6::Core
         Qt6::Widgets
 )
+target_link_libraries(appQtExplorer PRIVATE Qt6::Core Qt6::Widgets)
+target_link_libraries(appQtExplorer PRIVATE Qt6::Core Qt6::Widgets)
 
 # Compiler-specific options
 target_compile_features(appQtExplorer PRIVATE cxx_std_17)
@@ -117,7 +124,7 @@ endif()
 
 # Disable AutoMoc for now - will add back later when needed
 set_target_properties(appQtExplorer PROPERTIES
-    AUTOMOC OFF
-    AUTOUIC OFF
-    AUTORCC OFF
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTORCC ON
 )
